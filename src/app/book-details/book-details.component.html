@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <img [src]="book!.cover_url" class="card-img-top" alt="Book Cover">
+            <div class="card-body">
+                <h5 class="card-title">{{ book!.titre }}</h5>
+                <p class="card-text">Author: {{ book!.auteur }}</p>
+                <p class="card-text">Publication Date: {{ book!.date_publication }}</p>
+                <p class="card-text">Price: {{ book!.prix }}</p>
+                <a href="#" class="btn btn-secondary" (click)="closeDetails()">Cacher les details</a>
+            </div>
+        </div>
+    </div>
+</div>

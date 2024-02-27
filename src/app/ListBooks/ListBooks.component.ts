@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { Book } from '../model/book';
 
 @Component({
@@ -55,6 +55,7 @@ export class ListBooks {
                 'https://images.epagine.fr/843/9782035850843_1_75.jpg'
             )
         ];
+    searchText = '';
     selectBook(book : Book, event : Event) {
         this.unselectBook()
         this.selectedBook = book;
@@ -67,5 +68,13 @@ export class ListBooks {
         }
         document.getElementById(this.selectedBook.id.toString())?.classList.remove('table-info');
         this.selectedBook = null;
+    }
+
+    handleSearch(searchText: string) {
+        this.searchText = searchText;
+    }
+
+    filteredBooks(){
+        return this.books.filter(book => book.titre.toLowerCase().includes(this.searchText.toLowerCase()));
     }
 }

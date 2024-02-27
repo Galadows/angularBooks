@@ -1,3 +1,5 @@
+<div class="container">
+<app-search-book (search)="handleSearch($event)"></app-search-book>
 <table class="table">
   <thead>
     <tr>
@@ -10,7 +12,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr [id]="book.id" *ngFor="let book of books">
+    <tr [id]="book.id" *ngFor="let book of filteredBooks()">
       <td>{{ book.id }}</td>
       <td>{{ book.titre }}</td>
       <td>{{ book.auteur }}</td>
@@ -21,18 +23,5 @@
   </tbody>
 </table>
 
-<div class="row">
-  <div class="col-md-4" *ngIf="selectedBook !== null">
-    <div class="card mb-4">
-      <img [src]="selectedBook!.cover_url" class="card-img-top" alt="Book Cover">
-      <div class="card-body">
-        <h5 class="card-title">{{ selectedBook!.titre }}</h5>
-        <p class="card-text">Author: {{ selectedBook!.auteur }}</p>
-        <p class="card-text">Publication Date: {{ selectedBook!.date_publication }}</p>
-        <p class="card-text">Price: {{ selectedBook!.prix }}</p>
-        <a href="#" class="btn btn-secondary" (click)="unselectBook()">Cacher les details</a>
-      </div>
-    </div>
-  </div>
+<app-book-details *ngIf="selectedBook" [book]="selectedBook" (hideDetails)="unselectBook()"></app-book-details>
 </div>
-

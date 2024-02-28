@@ -1,14 +1,11 @@
-import { Component} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Book } from '../model/book';
 
-@Component({
-    selector: 'app-list-books',
-    templateUrl: './listBooks.component.html',
-
+@Injectable({
+  providedIn: 'root'
 })
-export class ListBooks {
-    selectedBook : any = null;
-        books: Book[] = [
+export class BookService {
+   books: Book[] = [
             new Book(
                 1,
                 'Le Petit Prince',
@@ -55,26 +52,10 @@ export class ListBooks {
                 'https://images.epagine.fr/843/9782035850843_1_75.jpg'
             )
         ];
-    searchText = '';
-    selectBook(book : Book, event : Event) {
-        this.unselectBook()
-        this.selectedBook = book;
-        document.getElementById(book.id.toString())?.classList.add('table-info');
-        
-    }
-    unselectBook() {
-        if (this.selectedBook === null) {
-            return;
-        }
-        document.getElementById(this.selectedBook.id.toString())?.classList.remove('table-info');
-        this.selectedBook = null;
-    }
 
-    handleSearch(searchText: string) {
-        this.searchText = searchText;
-    }
+  constructor() { }
 
-    filteredBooks(){
-        return this.books.filter(book => book.titre.toLowerCase().includes(this.searchText.toLowerCase()));
-    }
+  getBooks() {
+    return [...this.books];
+  }
 }
